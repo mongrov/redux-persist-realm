@@ -59,7 +59,9 @@ export function createRealmPersistStorage({ path } = {}) {
       if (matches.length > 0 && matches[0]) {
         return matches[0].content;
       } else {
-        throw new Error(`Could not get item with key: '${key}'`);
+        // return null if item is not in Db
+        return null;
+        // throw new Error(`Could not get item with key: '${key}'`);
       }
     });
   }
