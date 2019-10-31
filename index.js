@@ -1,6 +1,6 @@
 import Realm from "realm";
 
-const ITEM_SCHEMA = {
+export const ITEM_SCHEMA = {
   name: "ReduxPersistItem",
   primaryKey: "name",
   properties: {
@@ -44,8 +44,8 @@ function createRealmAccess(path = Realm.defaultPath) {
   };
 }
 
-export function createRealmPersistStorage({ path } = {}) {
-  const accessRealm = createRealmAccess(path);
+export function createRealmPersistStorage({path, realm}={}) {
+  const accessRealm = realm?()=>{ return realm }:createRealmAccess(path);
 
   async function accessItemInstances() {
     const realm = await accessRealm();
